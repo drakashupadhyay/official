@@ -16,3 +16,7 @@ Enquiry form -> Netlify function -> **email** (Resend) + **WhatsApp** (CallMeBot
 
 If the function is unreachable (e.g. index.html opened locally, or keys not set), the form shows an error asking the
 visitor to call +91 88928 64631. No WhatsApp window is ever opened by the form.
+
+## Mobility Cure
+Logo file: `mobility-cure-logo.png` (cropped from the clinic letterhead). Replace it with the original high-resolution
+file if you have one, keeping the same file name, for a sharper logo.
