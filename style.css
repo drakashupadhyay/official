@@ -34,6 +34,12 @@ nav a:hover{color:var(--brand)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:30px 0 0;color:var(--muted);font-size:.92rem}
 .chips span{padding:4px 12px;border-radius:999px;background:var(--tint)}
 .hero-visual{position:relative;min-height:530px;display:grid;align-items:start}
+.carousel{width:100%;height:530px;display:grid;grid-template-rows:1fr auto;gap:18px}
+.carousel-viewport{min-height:0;position:relative}
+.carousel-track{height:100%;position:relative}
+.carousel-slide{position:absolute;inset:0;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateX(18px) scale(.98);transition:opacity .45s ease,transform .45s ease,visibility .45s}
+.carousel-slide.is-active{opacity:1;visibility:visible;transform:none}
+.carousel-slide[aria-hidden="true"]{pointer-events:none}
 .portrait{width:min(78%,330px);height:490px;margin:0 5% 0 auto;border:8px solid var(--surface);border-radius:36px;box-shadow:var(--shadow);overflow:hidden;transform:rotate(2deg)}
 .portrait img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 27%}
 .dial{position:absolute;left:0;bottom:0;width:min(82%,360px);background:var(--surface);border:1px solid var(--line);border-radius:32px;padding:26px 22px 18px;box-shadow:var(--shadow);text-align:center;transform:rotate(-2deg)}
@@ -45,6 +51,12 @@ nav a:hover{color:var(--brand)}
 .pivot{fill:var(--accent);stroke:var(--ink);stroke-width:3}
 .num{font:800 46px "Bricolage Grotesque",sans-serif;fill:var(--ink);text-anchor:middle}
 .cap{margin:0;color:var(--muted);font-weight:500}
+.carousel-controls{display:flex;align-items:center;justify-content:center;gap:18px}
+.carousel-button{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:var(--surface);color:var(--ink);font-size:1.2rem;cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.carousel-button:hover{background:var(--brand);color:var(--on-brand);transform:translateY(-2px)}
+.carousel-dots{display:flex;gap:8px;align-items:center}
+.carousel-dot{width:11px;height:11px;padding:0;border:1px solid var(--brand);border-radius:50%;background:transparent;cursor:pointer}
+.carousel-dot.is-active{background:var(--brand);box-shadow:0 0 0 4px color-mix(in srgb,var(--brand) 18%,transparent)}
 .stats{background:var(--brand);color:var(--on-brand);padding:48px 0}
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
 .stat-grid b{display:block;font:800 clamp(2rem,4vw,3rem) "Bricolage Grotesque",sans-serif;line-height:1.1}
@@ -102,11 +114,11 @@ footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted);f
  .hero-grid,.about,.contact-grid,.why-grid{grid-template-columns:1fr}
  .stat-grid{grid-template-columns:1fr 1fr}
  .block{padding:64px 0}
- .hero-visual{min-height:500px;max-width:560px;width:100%;margin:0 auto}
+ .hero-visual{min-height:500px;max-width:560px;width:100%;margin:0 auto}.carousel{height:500px}
  .portrait{height:460px;width:min(72%,330px)}
  .dial{transform:rotate(-2deg)}
 }
-@media (max-width:520px){.cards,.steps{grid-template-columns:1fr}.steps li::after{display:none}.hero-visual{min-height:450px}.portrait{height:390px;width:76%;border-width:6px}.dial{width:88%;padding:18px 16px 12px}.dial .cap{font-size:.9rem}}
+@media (max-width:520px){.cards,.steps{grid-template-columns:1fr}.steps li::after{display:none}.hero-visual{min-height:450px}.carousel{height:450px}.portrait{height:390px;width:76%;border-width:6px}.dial{width:88%;padding:18px 16px 12px}.dial .cap{font-size:.9rem}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
 
 /* ---- Polish layer ---- */

@@ -38,6 +38,56 @@ const nav = $("#nav"), menu = $("#menu");
 menu.addEventListener("click", () => menu.setAttribute("aria-expanded", nav.classList.toggle("open")));
 nav.addEventListener("click", e => { if (e.target.tagName === "A") { nav.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); } });
 
+/* Hero visual carousel */
+const carousel = $(".carousel");
+if (carousel) {
+ const slides = [...carousel.querySelectorAll(".carousel-slide")];
+ const dots = [...carousel.querySelectorAll(".carousel-dot")];
+ let current = 0;
+ let timer;
+ let paused = false;
+
+ const showSlide = index => {
+  current = (index + slides.length) % slides.length;
+  slides.forEach((slide, i) => {
+   const active = i === current;
+   slide.classList.toggle("is-active", active);
+   slide.setAttribute("aria-hidden", String(!active));
+   if (active) slide.removeAttribute("inert");
+   else slide.setAttribute("inert", "");
+  });
+  dots.forEach((dot, i) => {
+   const active = i === current;
+   dot.classList.toggle("is-active", active);
+   dot.setAttribute("aria-selected", String(active));
+   dot.tabIndex = active ? 0 : -1;
+  });
+ };
+
+ const stopAutoAdvance = () => { clearInterval(timer); timer = undefined; };
+ const startAutoAdvance = () => {
+  stopAutoAdvance();
+  if (!reduced && !paused) timer = setInterval(() => showSlide(current + 1), 6000);
+ };
+ carousel.querySelector("[data-carousel-prev]").addEventListener("click", () => { showSlide(current - 1); startAutoAdvance(); });
+ carousel.querySelector("[data-carousel-next]").addEventListener("click", () => { showSlide(current + 1); startAutoAdvance(); });
+ dots.forEach((dot, i) => dot.addEventListener("click", () => { showSlide(i); startAutoAdvance(); }));
+ carousel.addEventListener("keydown", e => {
+  if (e.key === "ArrowLeft") { e.preventDefault(); showSlide(current - 1); startAutoAdvance(); }
+  if (e.key === "ArrowRight") { e.preventDefault(); showSlide(current + 1); startAutoAdvance(); }
+  if (e.key === "Home") { e.preventDefault(); showSlide(0); startAutoAdvance(); }
+  if (e.key === "End") { e.preventDefault(); showSlide(slides.length - 1); startAutoAdvance(); }
+ });
+ carousel.addEventListener("mouseenter", () => { paused = true; stopAutoAdvance(); });
+ carousel.addEventListener("mouseleave", () => { paused = false; startAutoAdvance(); });
+ carousel.addEventListener("focusin", () => { paused = true; stopAutoAdvance(); });
+ carousel.addEventListener("focusout", e => {
+  if (!carousel.contains(e.relatedTarget)) { paused = false; startAutoAdvance(); }
+ });
+ showSlide(0);
+ startAutoAdvance();
+}
+
 /* Range-of-motion dial */
 const arm = $("#arm"), deg = $("#deg"), sector = $("#sector");
 function setAngle(a) {
@@ -46,8 +96,8 @@ function setAngle(a) {
  sector.setAttribute("d", `M210 250 L380 250 A170 170 0 0 0 ${x.toFixed(1)} ${y.toFixed(1)}Z`);
  deg.textContent = Math.round(a) + "\u00B0";
 }
-if (reduced) setAngle(130);
-else {
+if (arm && deg && sector && reduced) setAngle(130);
+else if (arm && deg && sector) {
  setAngle(30);
  let s = null;
  const step = t => { s = s || t; const p = Math.min((t - s) / 2800, 1); setAngle(30 + 100 * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(step); };

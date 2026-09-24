@@ -44,22 +44,40 @@
    <p class="trust">Registered physiotherapist &middot; Reg. No. L-41758</p>
    <p class="founder">Founder, Mobility Cure Physiotherapy &amp; Homecare</p>
   </div>
-  <div class="hero-visual">
-   <figure class="portrait">
-    <img src="dr-akash-hero.png" width="941" height="1672" alt="Dr. Akash Kumar Upadhyay in his physiotherapy clinic" fetchpriority="high">
-   </figure>
-   <div class="dial" role="img" aria-label="Goniometer showing a joint's range of motion improving">
-    <svg viewBox="0 0 420 310" aria-hidden="true">
-     <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="var(--brand2)" stop-opacity=".15"/><stop offset="1" stop-color="var(--brand2)" stop-opacity=".55"/></linearGradient></defs>
-     <path id="sector" fill="url(#g)"/>
-     <path class="ticks" d="M400 250 A190 190 0 0 0 20 250"/>
-     <path class="rim" d="M380 250 A170 170 0 0 0 40 250"/>
-     <line class="fixed" x1="210" y1="250" x2="380" y2="250"/>
-     <g id="arm"><line class="moving" x1="210" y1="250" x2="380" y2="250"/></g>
-     <circle class="pivot" cx="210" cy="250" r="12"/>
-     <text class="num" id="deg" x="210" y="300">130&deg;</text>
-    </svg>
-    <p class="cap">Range of motion, restored</p>
+  <div class="hero-visual" aria-label="Practice highlights">
+   <div class="carousel" role="region" aria-roledescription="carousel" aria-label="Practice highlights carousel">
+    <div class="carousel-viewport">
+     <div class="carousel-track">
+      <div class="carousel-slide is-active" role="group" aria-roledescription="slide" aria-label="1 of 2">
+       <figure class="portrait">
+        <img src="dr-akash-hero.png" width="941" height="1672" alt="Dr. Akash Kumar Upadhyay in his physiotherapy clinic" fetchpriority="high">
+       </figure>
+      </div>
+      <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 2" aria-hidden="true" inert>
+       <div class="dial" role="img" aria-label="Goniometer showing a joint's range of motion improving">
+        <svg viewBox="0 0 420 310" aria-hidden="true">
+         <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="var(--brand2)" stop-opacity=".15"/><stop offset="1" stop-color="var(--brand2)" stop-opacity=".55"/></linearGradient></defs>
+         <path id="sector" fill="url(#g)"/>
+         <path class="ticks" d="M400 250 A190 190 0 0 0 20 250"/>
+         <path class="rim" d="M380 250 A170 170 0 0 0 40 250"/>
+         <line class="fixed" x1="210" y1="250" x2="380" y2="250"/>
+         <g id="arm"><line class="moving" x1="210" y1="250" x2="380" y2="250"/></g>
+         <circle class="pivot" cx="210" cy="250" r="12"/>
+         <text class="num" id="deg" x="210" y="300">130&deg;</text>
+        </svg>
+        <p class="cap">Range of motion, restored</p>
+       </div>
+      </div>
+     </div>
+    </div>
+    <div class="carousel-controls">
+     <button class="carousel-button" type="button" data-carousel-prev aria-label="Show previous highlight">&larr;</button>
+     <div class="carousel-dots" role="tablist" aria-label="Choose a practice highlight">
+      <button class="carousel-dot is-active" type="button" role="tab" aria-selected="true" aria-label="Show doctor portrait" data-slide="0"></button>
+      <button class="carousel-dot" type="button" role="tab" aria-selected="false" aria-label="Show range of motion visual" data-slide="1" tabindex="-1"></button>
+     </div>
+     <button class="carousel-button" type="button" data-carousel-next aria-label="Show next highlight">&rarr;</button>
+    </div>
    </div>
   </div>
  </div>
