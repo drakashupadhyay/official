@@ -37,6 +37,13 @@ $("#theme").addEventListener("click", () => {
 const nav = $("#nav"), menu = $("#menu");
 menu.addEventListener("click", () => menu.setAttribute("aria-expanded", nav.classList.toggle("open")));
 nav.addEventListener("click", e => { if (e.target.tagName === "A") { nav.classList.remove("open"); menu.setAttribute("aria-expanded", "false"); } });
+document.addEventListener("keydown", e => {
+ if (e.key === "Escape" && nav.classList.contains("open")) {
+  nav.classList.remove("open");
+  menu.setAttribute("aria-expanded", "false");
+  menu.focus();
+ }
+});
 
 /* Hero visual carousel */
 const carousel = $(".carousel");
