@@ -1,7 +1,6 @@
 /* ===== Edit these ===== */
 const CONFIG = {
- whatsapp: "918892864631", // country code + number, no + or spaces
- endpoint: "/.netlify/functions/enquiry" // sends the WhatsApp + email notification
+ whatsapp: "918892864631" // country code + number, no + or spaces
 };
 
 const SERVICES = [
@@ -72,21 +71,14 @@ const io = new IntersectionObserver(entries => entries.forEach(e => {
 }), { threshold: .25 });
 document.querySelectorAll(".reveal,[data-count]").forEach(el => io.observe(el));
 
-/* Booking form: notifies Dr. Akash on WhatsApp + email via the serverless function */
-$("#book").addEventListener("submit", async e => {
- e.preventDefault();
- const form = e.target, note = $("#note"), btn = form.querySelector("button"), d = Object.fromEntries(new FormData(form));
- btn.disabled = true; note.textContent = "Sending...";
- try {
-  const r = await fetch(CONFIG.endpoint, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(d) });
-  if (!r.ok) throw new Error("send failed");
-  form.reset();
-  note.textContent = "Thank you! Your enquiry has been sent. You will get a call shortly.";
- } catch (err) {
-  note.textContent = "Sorry, we could not send your enquiry right now. Please call +91 88928 64631.";
- }
- btn.disabled = false;
-});
+/* Booking form uses the browser's normal HTML form submission logic */
+const form = $("#book");
+if (form) {
+ form.addEventListener("submit", () => {
+  const note = $("#note");
+  if (note) note.textContent = "Your email app may open to send the enquiry.";
+ });
+}
 
 /* WhatsApp button */
 const fab = $("#fab");
